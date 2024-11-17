@@ -1,0 +1,32 @@
+@model List<Dictionary<string, object>>
+@{
+    var months = ViewBag.Months as List<string>;
+}
+
+<table>
+    <thead>
+        <tr>
+            <th style="border: 1px solid black; padding: 8px;">NIK</th>
+            <th style="border: 1px solid black; padding: 8px;">Nama</th>
+            @foreach (var month in months)
+            {
+                <th style="border: 1px solid black; padding: 8px;">@DateTime.ParseExact(month, "yyyyMM", null).ToString("MMM yyyy")</th>
+            }
+            <th style="border: 1px solid black; padding: 8px;">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td style="border: 1px solid black; padding: 8px;">@row["nik"]</td>
+                <td style="border: 1px solid black; padding: 8px;">@row["name"]</td>
+                @foreach (var abs in (row["absensi"] as List<int>))
+                {
+                    <td style="border: 1px solid black; padding: 8px;">@abs</td>
+                }
+                <td style="border: 1px solid black; padding: 8px;">@row["total"]</td>
+            </tr>
+        }
+    </tbody>
+</table>

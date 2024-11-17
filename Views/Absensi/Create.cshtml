@@ -1,0 +1,16 @@
+@model List<Dictionary<string, object>>
+
+<form method="post">
+    <label for="employee">Karyawan:</label>
+    <select name="employeeId" id="employee">
+        @foreach (var emp in Model)
+        {
+            <option value="@emp["Id"]">@emp["Name"] - @emp["Nik"]</option>
+        }
+    </select>
+    <br>
+    <label for="tanggalAbsen">Tanggal Absen:</label>
+    <input type="date" name="tanggalAbsen" id="tanggalAbsen" required />
+    <br>
+    <button type="submit">Simpan</button>
+</form>
