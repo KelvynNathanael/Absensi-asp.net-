@@ -15,12 +15,14 @@ public class AbsensiController : Controller
     {
         var data = _context.Absens
                 .Include(a => a.Employee)
+                .OrderBy(a => a.Employee.Nik)
                 .Select(a => new Dictionary<string, object>
                 {
                     { "Nik", a.Employee.Nik },
                     { "Name", a.Employee.Name },
                     { "TanggalAbsen", a.Tanggal_Absen }
-                }).ToList();
+                })
+                .ToList();
         return View(data);
     }
 
